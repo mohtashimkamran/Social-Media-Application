@@ -8,6 +8,12 @@ const app = express();
 //for home page
 app.use('/',require('./routes'));
 
+//setting up view engine
+app.set('view engine','ejs');
+app.set('views',"./views")
+
+//for users page
+// app.use('/users',require('./routes/user'));
 
 app.listen(port,function(err){
     if (err){
