@@ -11,6 +11,6 @@ app.listen(port,function(err){
         console.log(`Error in starting the server : ${err}`);  //interpolation
     }
     else{
-        console.log(`Server is running on port : ${port}`)
+        console.log(`Server is up and running on port : ${port}`)
     }
 })
