@@ -7,6 +7,15 @@ const app = express();
 const expresslayouts = require('express-ejs-layouts');
 app.use(expresslayouts);
 
+//extract static files and assets from subpages into layouts
+app.set('layout extractStyles',true);
+app.set('layout extractScripts',true);
+
+
+
+//for static files
+app.use(express.static('./assets'));
+
 //use express router
 //for home page
 app.use('/',require('./routes'));
@@ -15,8 +24,7 @@ app.use('/',require('./routes'));
 app.set('view engine','ejs');
 app.set('views',"./views")
 
-//for users page
-// app.use('/users',require('./routes/user'));
+
 
 app.listen(port,function(err){
     if (err){
