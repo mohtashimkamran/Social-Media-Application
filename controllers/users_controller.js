@@ -24,3 +24,7 @@ module.exports.create=function(req,res){
     //Todo Later
 }
 
+//handle sign in form and create a session for specific user
+module.exports.createSession=function(req,res){
+    //Todo Later
+}
