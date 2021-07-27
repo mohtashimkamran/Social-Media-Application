@@ -6,6 +6,11 @@ const app = express();
 //for database
 const db = require('./config/mongoose');
 
+//used for session cookies
+const session = require('express-session');
+const passport = require('passport');
+const passportLocal = require('./config/passport-local-strategy');
+
 app.use(express.urlencoded());
 app.use(cookieParser());
 
@@ -23,15 +28,30 @@ app.set('layout extractScripts',true);
 //for static files
 app.use(express.static('./assets'));
 
-//use express router
-//for home page
-app.use('/',require('./routes'));
+
 
 //setting up view engine
 app.set('view engine','ejs');
 app.set('views',"./views")
 
 
+//session cookies
+app.use(session({
+    name:'CODEZONE',
+    //Change the secret before production 
+    secret:"Something",
+    saveUninitialized:false,
+    resave:false,
+    cookie:{
+        maxAge:(1000 * 60 * 100)
+    }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+//use express router
+//for home page
+app.use('/',require('./routes'));
 
 app.listen(port,function(err){
     if (err){
