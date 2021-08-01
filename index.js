@@ -40,14 +40,16 @@ app.use(session({
     name:'CODEZONE',
     //Change the secret before production 
     secret:"Something",
-    saveUninitialized:false,
-    resave:false,
+    saveUninitialized:false,  //whenever there is a req which is not initialised which means the user is not logged in so do I have to save some additional data in the database so No! this is why it is created as False
+    resave:false,   // when the identity is established that means when the session cookie is created and do i want to save the data which is not changed ? So NO! that is why it is termed as False.
     cookie:{
         maxAge:(1000 * 60 * 100)
     }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(passport.setAuthenticatedUser);
 
 //use express router
 //for home page
