@@ -9,6 +9,10 @@ module.exports.profile = function(req,res){
 
 //render the signup page
 module.exports.signup = function(req,res){
+    if (req.isAuthenticated()){
+        return res.redirect('/users/profile')
+    }
+
     return res.render('user_sign_up',{
         title:"CodeZone | Sign Up"
     })
@@ -16,6 +20,9 @@ module.exports.signup = function(req,res){
 
 //render the signin page
 module.exports.signin = function(req,res){
+    if (req.isAuthenticated()){
+       return  res.redirect('/users/profile')
+    }
     return res.render('user_sign_in',{
         title:"CodeZone | Sign In"
     })

@@ -11,6 +11,8 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 
+const MongoStore = require('connect-mongo');
+
 app.use(express.urlencoded());
 app.use(cookieParser());
 
@@ -36,6 +38,7 @@ app.set('views',"./views")
 
 
 //session cookies
+//Mongo store is use to store the session  cookie in the db
 app.use(session({
     name:'CODEZONE',
     //Change the secret before production 
@@ -44,7 +47,20 @@ app.use(session({
     resave:false,   // when the identity is established that means when the session cookie is created and do i want to save the data which is not changed ? So NO! that is why it is termed as False.
     cookie:{
         maxAge:(1000 * 60 * 100)
-    }
+    },
+    store: MongoStore.create({
+        mongoUrl:'mongodb://localhost/codezone_development',
+    },
+    {
+            mongooseConnection: db,
+            autoRemove:'disabled'
+    },
+    {
+        function(err){
+            console.log(err || 'connect-mongo setup ok');
+        }
+    },
+    )
 }));
 app.use(passport.initialize());
 app.use(passport.session());
