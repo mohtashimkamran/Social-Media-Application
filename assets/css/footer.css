@@ -1,0 +1,27 @@
+footer {
+  color: white;
+  background-color: #002569;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  padding-left: 1em;
+  padding-right: 1em;
+  height: 3.2rem; }
+
+footer ul {
+  list-style: none; }
+
+footer ul a {
+  color: white; }
+
+footer ul li {
+  display: inline-block;
+  justify-content: space-around;
+  margin-right: 0.1em; }
+
+footer ul li a {
+  text-decoration: none; }
+
+@media screen and (max-width: 570px) {
+  #hide {
+    display: none; } }

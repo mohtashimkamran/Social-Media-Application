@@ -1,4 +1,7 @@
 body {
   margin: 0;
-  background-color: cadetblue;
-  text-align: center; }
+  background-color: skyblue;
+  text-align: center;
+  margin: 0; }
+  body #layout-main {
+    height: 86.2vh; }
