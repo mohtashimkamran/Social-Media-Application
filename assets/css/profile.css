@@ -1,2 +1,4 @@
 body {
   color: #0a0a0a; }
+  body #profile {
+    padding: 10px; }
