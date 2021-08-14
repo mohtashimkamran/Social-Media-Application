@@ -1,0 +1,17 @@
+#home-container{
+    display: grid;
+    grid-template-columns: 70% 20%;
+    grid-gap: 10%;
+    h1{
+        text-decoration: underline;
+    }
+    #feed-posts{
+        list-style: none;
+    }
+    #user-fiends{
+        padding: 10px;
+        border-left: 1px solid lightgray;
+        padding: 10px;
+        height: 100%;
+    }
+}
