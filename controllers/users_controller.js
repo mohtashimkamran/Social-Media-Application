@@ -17,13 +17,14 @@ module.exports.update = async function(req,res){
         if (req.user.id == req.params.id){
             await User.findByIdAndUpdate(req.params.id,req.body);
             
+            req.flash('success','Updated Profile');
             return res.redirect('back');
         }
         else{
             return res.status(401).isAuthenticated('Unauthorized');
         }
     } catch (error) {
-        console.log("Error",error);
+        req.flash('error','Unable to update profile');
     }
 }
 
