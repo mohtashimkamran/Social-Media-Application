@@ -23,7 +23,8 @@ module.exports.create = async function(req,res){
 
     } catch (error) {
 
-        req.flash('error',error)
+        req.flash('error',error);
+        console.log(error);
         return res.redirect('back');
     }
 }
