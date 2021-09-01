@@ -45,6 +45,8 @@ app.set('layout extractScripts',true);
 //for static files
 app.use(express.static('./assets'));
 
+//make the upload part available for browser
+app.use('/uploads',express.static(__dirname+'/uploads'))
 
 
 //setting up view engine

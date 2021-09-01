@@ -13,19 +13,37 @@ module.exports.profile = async function(req,res){
     }
 }
 module.exports.update = async function(req,res){
-    try {
-        if (req.user.id == req.params.id){
-            await User.findByIdAndUpdate(req.params.id,req.body);
+    if (req.user.id == req.params.id){
+        try {
+            let user = await User.findById(req.params.id);
+            User.uploadedAvatar(req,res,function(err){
+                if (err){ console.log("***Multer Error***",err)}
+
+                user.name = req.body.name;
+                user.email = req.body.email;
+                if(req.file){
+                    //this is saving the path of the uplopaded file into the avatar feild in the user
+                    user.avatar = User.avatarPath + '/' + req.file.filename;
+                }
+                user.save();
+                return res.redirect('back');
+            })
+
+
+        } catch (error) {
+            req.flash('error','You cannot delete this post')
+            return res.redirect('back')
             
-            req.flash('success','Updated Profile');
-            return res.redirect('back');
         }
-        else{
-            return res.status(401).isAuthenticated('Unauthorized');
-        }
-    } catch (error) {
-        req.flash('error','Unable to update profile');
     }
+    else{
+        req.flash('error','Unauthorised')
+        return res.status(401).isAuthenticated('Unauthorized');
+    
+    }
+
+
+
 }
 
 
