@@ -3,12 +3,11 @@
      
     
         <small>
-            <a class="delete-post-button" href="/posts/destroy/<%= post.id %>  ">x</a>
+            <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">x</a>
         </small>
     <% } %>
     <%= post.content %> <br>
-By-
-    <%= post.user.name %> 
+By- <%= post.user.name %> 
 <!-- for post comments -->
 <div class="post-comments">
     <% if (locals.user) { %>
@@ -20,7 +19,7 @@ By-
     <% } %>
 
     <div class="post-comments-lists">
-        <ul id="post-comments-<%= post._id %> ">
+        <ul id="post-comments-<%= post._id %>">
             <% for( comment of post.comments) { %>
                 <%- include('_comment') %> 
             <% } %>
