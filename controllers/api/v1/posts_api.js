@@ -19,13 +19,20 @@ module.exports.index =async function(req,res){
 }
 module.exports.destroy= async function(req,res){
     try {
-        let post = await Post.findById(req.params.id)
+        let post = await Post.findById(req.params.id);
+        
+        if(post.user == req.user.id){
             post.remove();
             await Comment.deleteMany({post:req.params.id});
             return res.json(200,{
                 message:'Post and associated Comments Deleted Successfully',
+            });
+        }else{
+            return res.json(401,{
+                massage:"You cannot delete this post!"
             })
-    } catch (error) {
+        }
+    }catch (error) {
         console.log(error);
         return res.json(500,{
             message: 'Internal Server Error'
